@@ -24,10 +24,8 @@ var player;
 func _ready():
 	size = global.tilezise;
 	lines = get_node("lines");
-	lines.set_translation(Vector3(-240,320,-size))
+	lines.set_translation(Vector3(-global.screenSize.x/2,global.screenSize.y/2,-size))
 
-	
-	
 	player =  get_node("lines/player");
 	player.set_scale(Vector3(size,size,size));
 
@@ -39,23 +37,22 @@ func generate():
 	var line = load("res://scenes/line.tscn").instance();
 	for enemyType in range(lineArray[lineType].size()):
 		if(lineArray[lineType][enemyType] == 1):
-			var enemy = load("res://scenes/enemy.tscn").instance();
-			enemy.set_scale(Vector3(size,size,size));
-			enemy.set_translation(Vector3(size*enemyType,size*6,0));
-			line.add_child(enemy);
+			initObject(line,"res://scenes/enemy.tscn",enemyType)
 		pass
 		fishRand = round(rand_range(0,1));
 		if(lineArray[lineType][enemyType] == 0 && fishRand == 1):
-			var enemy = load("res://scenes/fish.tscn").instance();
-			enemy.set_scale(Vector3(size,size,size));
-			enemy.set_translation(Vector3(size*enemyType,size*6,0));
-			line.add_child(enemy);
+			initObject(line,"res://scenes/fish.tscn",enemyType)
 		pass
 	
 	lines.add_child(line);
 	pass
 
-
+func initObject(parent,url,cord):
+	var tile = load(url).instance();
+	tile.set_scale(Vector3(size,size,size));
+	tile.set_translation(Vector3(size*cord,size*6,0));
+	parent.add_child(tile);
+	pass
 func _on_left_pressed():
 	if(player.get_translation().x>0):
 		player.move(1);
