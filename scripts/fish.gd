@@ -10,7 +10,7 @@ func _ready():
 	pass
 
 func _on_fish_body_enter( body ):
-	global.linesSpeed += 0.05;
+	global.linesSpeed += 0.03;
 	global.score+=1;
 	get_tree().get_root().get_node("main").newScore();
 	queue_free();

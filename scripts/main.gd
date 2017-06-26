@@ -18,11 +18,13 @@ var size = 0;
 var lines;
 var lineType = 0;
 var fishRand = 0;
+var randMaximumLevel = 4;
+var deltaPoint = 0;
 
 var player;
 
 func _ready():
-	global.linesSpeed = 3;
+	global.linesSpeed = 4;
 	size = global.tilezise;
 	lines = get_node("lines");
 	lines.set_translation(Vector3(-global.screenSize.x/2,global.screenSize.y/2,-size))
@@ -34,7 +36,7 @@ func _ready():
 	pass
 func generate():
 	randomize();
-	lineType =  round(rand_range(0,lineArray.size()-1));
+	lineType =  round(rand_range(0,randMaximumLevel));
 	var line = load("res://scenes/line.tscn").instance();
 	for enemyType in range(lineArray[lineType].size()):
 		if(lineArray[lineType][enemyType] == 1):
@@ -70,6 +72,11 @@ func die():
 	pass
 func newScore():
 	get_node("score/points").set_text(String(global.score))
+	if(randMaximumLevel<lineArray.size()-1):
+		if(deltaPoint>15 ):
+			randMaximumLevel+=1;
+		else:
+			deltaPoint+=1;
 	pass
 func _on_AcceptDialog_confirmed():
 	get_tree().reload_current_scene();
