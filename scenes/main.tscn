@@ -1,0 +1,114 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
+
+[node name="main" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.934884, -0.354954, 0, 0.354954, 0.934884, 0, -97.6803, 408.774 )
+projection = 0
+fov = 60.0
+near = 0.0
+far = 150.0
+keep_aspect = 0
+current = true
+visible_layers = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+
+[node name="lines" type="KinematicBody" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 0
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.001
+
+[node name="player" parent="lines" instance=ExtResource( 2 )]
+
+transform/local = Transform( 96, 0, 0, 0, 96, 0, 0, 0, 96, 0, 0, 0 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.4423, 114.761, 288.314 )
+layers = 1
+params/enabled = true
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 1.0
+colors/diffuse = Color( 1, 1, 1, 1 )
+colors/specular = Color( 1, 1, 1, 1 )
+shadow/shadow = false
+shadow/darkening = 0.0
+shadow/z_offset = 0.05
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+shadow/mode = 0
+shadow/max_distance = 0.0
+shadow/split_weight = 0.5
+shadow/zoffset_scale = 2.0
+
+[node name="buttons" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="left" type="Button" parent="buttons"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 21.0
+margin/top = 570.0
+margin/right = 71.0
+margin/bottom = 620.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "left"
+flat = false
+
+[node name="right" type="Button" parent="buttons"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 416.0
+margin/top = 571.0
+margin/right = 466.0
+margin/bottom = 621.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "right"
+flat = false
+
+[connection signal="pressed" from="buttons/left" to="." method="_on_left_pressed"]
+
+[connection signal="pressed" from="buttons/right" to="." method="_on_right_pressed"]
+
+
