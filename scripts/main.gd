@@ -50,7 +50,7 @@ func generate():
 func initObject(parent,url,cord):
 	var tile = load(url).instance();
 	tile.set_scale(Vector3(size,size,size));
-	tile.set_translation(Vector3(size*cord,size*6,0));
+	tile.set_translation(Vector3(size*cord,size*9,0));
 	parent.add_child(tile);
 	pass
 func _on_left_pressed():

@@ -11,9 +11,13 @@ func _ready():
 	set_translation(Vector3(global.tilezise*2,-global.screenSize.y+global.tilezise*2,0));
 	currPos = get_translation();
 	set_process(true)
+	
+
+
 	pass
 
 func _process(delta):
+	print(is_colliding())
 	if(isMove && deltaPos <= global.tilezise-speed):
 		if(direction == 1):
 			set_translation(get_translation() - Vector3(speed,0,0))

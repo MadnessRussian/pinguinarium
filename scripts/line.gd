@@ -18,6 +18,6 @@ func move():
 		get_parent().get_parent().generate();
 		gen_last = true;
 	
-	if(get_translation().y<-global.screenSize.y*2):
+	if(get_translation().y<-global.screenSize.y*2.5):
 		queue_free();
 	pass
