@@ -25,6 +25,7 @@ var player;
 
 func _ready():
 	global.linesSpeed = 4;
+	global.score = 0;
 	size = global.tilezise;
 	lines = get_node("lines");
 	lines.set_translation(Vector3(-global.screenSize.x/2,global.screenSize.y/2,-size))
