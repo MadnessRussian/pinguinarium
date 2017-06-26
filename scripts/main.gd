@@ -75,6 +75,7 @@ func newScore():
 	if(randMaximumLevel<lineArray.size()-1):
 		if(deltaPoint>15 ):
 			randMaximumLevel+=1;
+			deltaPoint = 0;
 		else:
 			deltaPoint+=1;
 	pass
