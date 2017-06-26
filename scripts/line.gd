@@ -12,7 +12,7 @@ func _process(delta):
 	pass
 
 func move():
-	set_translation(get_translation()+Vector3(0,-3,0))
+	set_translation(get_translation()+Vector3(0,-global.linesSpeed,0))
 	
 	if(get_translation().y<=-global.tilezise*2 && !gen_last ):
 		get_parent().get_parent().generate();

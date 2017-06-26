@@ -22,6 +22,7 @@ var fishRand = 0;
 var player;
 
 func _ready():
+	global.linesSpeed = 3;
 	size = global.tilezise;
 	lines = get_node("lines");
 	lines.set_translation(Vector3(-global.screenSize.x/2,global.screenSize.y/2,-size))
@@ -54,12 +55,31 @@ func initObject(parent,url,cord):
 	parent.add_child(tile);
 	pass
 func _on_left_pressed():
-	if(player.get_translation().x>0):
+	if(player.get_translation().x>0 && global.linesSpeed != 0):
 		player.move(1);
 	pass # replace with function body
 
 
 func _on_right_pressed():
-	if(player.get_translation().x<global.screenSize.x-size):
+	if(player.get_translation().x<global.screenSize.x-size  && global.linesSpeed != 0):
 		player.move(2);
+	pass # replace with function body
+
+func die():
+	get_node("AcceptDialog").show_modal();
+	pass
+func newScore():
+	get_node("score/points").set_text(String(global.score))
+	pass
+func _on_AcceptDialog_confirmed():
+	get_tree().reload_current_scene();
+	pass # replace with function body
+
+
+func _on_SwipeDetector_swiped( gesture ):
+	if(gesture.get_direction() == "left" && player.get_translation().x>0 && global.linesSpeed != 0):
+		player.move(1);
+	if(gesture.get_direction() == "right" && player.get_translation().x<global.screenSize.x-size  && global.linesSpeed != 0):
+		player.move(2);
+
 	pass # replace with function body

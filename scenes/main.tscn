@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.tscn" type="PackedScene" id=3]
 
 [node name="main" type="Node"]
 
@@ -107,8 +108,71 @@ shortcut = null
 text = "right"
 flat = false
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 203.0
+margin/top = 291.0
+margin/right = 302.0
+margin/bottom = 349.0
+popup/exclusive = true
+window/title = "Alert!"
+dialog/text = "You are died!"
+dialog/hide_on_ok = true
+
+[node name="score" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Label" type="Label" parent="score"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 14.0
+text = "SCORE:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="points" type="Label" parent="score"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 47.0
+margin/top = 0.0
+margin/right = 87.0
+margin/bottom = 14.0
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SwipeDetector" parent="." instance=ExtResource( 3 )]
+
 [connection signal="pressed" from="buttons/left" to="." method="_on_left_pressed"]
 
 [connection signal="pressed" from="buttons/right" to="." method="_on_right_pressed"]
+
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
+
+[connection signal="swiped" from="SwipeDetector" to="." method="_on_SwipeDetector_swiped"]
 
 

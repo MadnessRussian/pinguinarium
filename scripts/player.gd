@@ -13,12 +13,11 @@ func _ready():
 	set_process(true)
 	
 
-
 	pass
 
 func _process(delta):
-	print(is_colliding())
-	if(isMove && deltaPos <= global.tilezise-speed):
+
+	if(isMove && deltaPos <= global.tilezise-speed ):
 		if(direction == 1):
 			set_translation(get_translation() - Vector3(speed,0,0))
 		if(direction == 2):
@@ -28,6 +27,7 @@ func _process(delta):
 		set_translation(currPos)
 		isMove = false;
 	pass
+
 func move(dir):
 	if dir == 1:
 		currPos = Vector3(get_translation().x - global.tilezise,get_translation().y,get_translation().z);
@@ -37,3 +37,11 @@ func move(dir):
 	isMove = true;
 	deltaPos = 0;
 	pass
+	
+
+
+func _on_CollisionShape_enter_tree():
+	print("enter")
+	pass # replace with function body
+
+
