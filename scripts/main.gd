@@ -32,6 +32,8 @@ func _ready():
 
 	player =  get_node("lines/player");
 	player.set_scale(Vector3(size,size,size));
+	
+	VisualServer.set_default_clear_color(Color(0,0,0))
 
 	generate();
 	pass
